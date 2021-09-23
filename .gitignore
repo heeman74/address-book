@@ -1,0 +1,5 @@
+node_modules/
+src/server/build
+src/client/dist
+public/
+package-lock.json
