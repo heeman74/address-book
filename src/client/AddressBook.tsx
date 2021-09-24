@@ -4,26 +4,30 @@ import { Contact } from "./Contact";
 import './main.css';
 
 const AddressBook = () => {
-
-  const [selectedId, setSelect]  = useState(-1);
-  const initialState = [{
+const initialState = [{
     id: 1,
     firstName: 'Steve',
     lastName: 'Chung',
-    emails:['steve@email.com']
-  }]
-
-  const handleClick = (id) => {
-    console.log(id)
-    setSelect(id);
+    emails:['steve@email.com', 'test@email.com']
+  },
+  {id: 2,
+   firstName: 'Sun',
+    lastName: 'Chung',
+  emails:['sun@email.com']}]
+  const [selectedId, setSelect]  = useState(-1);
+  const [selectedInfo, setSelectedInfo] = useState(initialState[0])
+  const [isCanceled, setCancel] = useState(false)
+  const handleClick = (selectedId) => {
+    console.log(selectedId)
+    setSelect(selectedId);
+    setSelectedInfo(initialState.filter(({id}) => id === selectedId)[0])
   } 
-  console.log(initialState)
+  console.log(selectedInfo)
   return (
     <>
     <div className='container'>
-      <Contacts handleSelect={handleClick} contacts = {initialState}></Contacts>
-      <Contact {...initialState[0]}></Contact>
-      {/* <ContactForm></ContactForm> */}
+      <Contacts isCanceled={isCanceled} setCancel={setCancel} setSelectedInfo={setSelectedInfo} handleSelect={handleClick} contacts = {initialState}></Contacts>
+      <Contact  setCancel={setCancel}  {...selectedInfo}></Contact>
     </div>
     </>
   )

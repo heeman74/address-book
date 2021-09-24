@@ -60,6 +60,7 @@ const config = {
 		path: path.resolve(__dirname, 'src/client/dist'),
 		filename: 'bundle.js',
 	},
+	devtool: 'source-map',
 	resolve: {
 		extensions: ['.js', '.ts', '.jsx', '.tsx'],
 		plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
@@ -70,6 +71,10 @@ const config = {
 				test: /\.tsx?$/,
 				use: 'babel-loader',
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.(css|scss)$/,
+				use: ['style-loader', 'css-loader'],
 			},
 		],
 	},
