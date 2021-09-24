@@ -66,16 +66,26 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
 
   const handleSubmit = () => {
     const {firstName, lastName } = contactInfo;
+    console.log('submit cli')
+    if (firstName === '' && lastName === '') {
+      setValidation([...validation, 'Please enter first name!', 'Please enter last name!']);
+    } else if (firstName === ''){
+        setValidation([...validation, 'Please enter first name!']);
+    } else if (lastName === ''){
+      setValidation([...validation, 'Please enter last name!']);
+    };
+    
   }
 
   const emailList = () => contactInfo.emails.map((email, idx) => {
     return (<div key={idx} className='email' onMouseEnter={() => handleMouseEnter(idx)}  onMouseLeave={()=> handleMouseLeave(idx)}>{email} {showMinus[idx] && <span className='icon minus' onClick={() => handleRemoveEmail(idx)}><ion-icon name="remove-outline"></ion-icon></span>}</div>)
   })
- 
+ console.log({validation})
   return(
     <>
-    {validation.length && validation.map(message => (<div style={{color: 'red'}}>{message}</div>))}
-    <form className='contact' onSubmit={handleSubmit}>
+   
+    <form className='contact'>
+       {validation.length ? validation.map(message => (<div style={{color: 'red'}}>{message}</div>)) : null}
       <div className='name-form'>
         <div>
           <label>First Name</label>
@@ -104,7 +114,7 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
         <a className='button del'>Delete</a> 
         <span style={{display:'inline-block'}}>
           <a className='button cal' onClick={handleCancel}>Cancel</a>
-          <a type="submit" className='button save'>Save</a>
+          <a className='button save' onClick={handleSubmit}>Save</a>
         </span>
       </div>
     </form>
