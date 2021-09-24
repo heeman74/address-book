@@ -1,0 +1,173 @@
+.container {
+	display: grid;
+	width: 60%;
+	position: absolute;
+	top: 22%;
+	left: 22%;
+	margin: auto;
+	grid-template-columns: max-content minmax(40%, 1fr);
+	grid-template-areas:
+		'contacts contact'
+		'contacts contact';
+	font-family: 'Roboto', sans-serif;
+	background: #5cdb95;
+	font-size: 20px;
+}
+
+input[type='text'] {
+	font-size: 20px;
+}
+a.button {
+	display: inline-block;
+	padding: 0.3em 1.2em;
+	margin: 0 0.1em 0.1em 0;
+	border: 0.16em solid rgba(255, 255, 255, 0);
+	border-radius: 2em;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-weight: 300;
+	text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+	text-align: center;
+	transition: all 0.2s;
+	cursor: pointer;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 10%;
+}
+a.button.del:hover,
+a.button.save:hover {
+	border-color: rgba(255, 255, 255, 1);
+}
+
+a.button.del {
+	background-color: #f14e4e;
+	color: white;
+}
+
+a.button.cal {
+	border: 2px solid #4e9af1;
+}
+
+a.button.save,
+a.button.cal:hover {
+	background-color: #4e9af1;
+}
+
+a.button.del,
+.save,
+a.button.cal:hover {
+	color: #fff;
+}
+
+.minus {
+	display: inline-block;
+	cursor: pointer;
+}
+
+input,
+label {
+	float: left;
+	clear: both;
+}
+
+input {
+	margin: 15px 0;
+	padding: 15px 10px;
+	width: 100%;
+	outline: none;
+	border: 1px solid #bbb;
+	border-radius: 20px;
+	display: inline-block;
+}
+
+.contacts {
+	grid-area: contacts;
+	width: 100%;
+	height: 100%;
+	background-color: aqua;
+}
+
+.contact {
+	grid-area: contact;
+	margin: auto;
+	padding: 5%;
+}
+
+.contact-name {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5% 12% 5% 8%;
+	margin-bottom: 2px;
+}
+
+@media (max-width: 600px) {
+	.container {
+		grid-template-areas:
+			'contacts contacts'
+			'contact contact';
+	}
+}
+
+.contact-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.contact {
+	width: 80%;
+}
+.contact-list div:hover {
+	background-color: blueviolet;
+	color: white;
+	cursor: pointer;
+}
+.contact-list div {
+	width: 100%;
+	height: 100%;
+}
+.selected {
+	background-color: blueviolet;
+	color: white;
+}
+
+.email-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-radius: 50%;
+	border: none;
+	text-decoration: none;
+	transition: background 0.2s;
+}
+
+.minus {
+	background: #f14e4e;
+	color: white;
+}
+
+.small-plus,
+.add-contact {
+	background: #4e9af1;
+}
+.email {
+	width: auto;
+	margin-bottom: 5px;
+}
+
+.name-form {
+	display: flex;
+	justify-content: space-between;
+}

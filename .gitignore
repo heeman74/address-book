@@ -1,5 +1,6 @@
 node_modules/
 src/server/build
-src/client/dist
+src/client/dist/bundle.js
+src/client/dist/bundle.js.map
 public/
 package-lock.json

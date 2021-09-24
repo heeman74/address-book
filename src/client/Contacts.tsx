@@ -2,21 +2,33 @@ import React, { useState } from "react"
 
 
 
-const Contacts = (props) => {
-  const [selectedId, setSelect] = useState(-1)
+const Contacts = ({handleSelect, contacts, setSelectedInfo, setCancel, isCanceled}) => {
+  const [selectedId, setSelect] = useState(contacts[0].id)
   const handleClick = (id) => {
     setSelect(id);
-    props.handleSelect(id);
+    handleSelect(id);
+    setCancel(false);
   }
-  const contactsList = props.contacts.map((contact) => {
-    const {firstName, lastName, id, handleSelect} = contact;
-   return(<div className={selectedId === id && 'select'} key={id} onClick={() => handleClick(id)}>{firstName} {lastName}</div>) 
+  const contactsList = contacts.map((contact) => {
+    const {firstName, lastName, id} = contact;
+   return(
+   <div className= { selectedId === id && !isCanceled ? 'contact-name selected' : 'contact-name'} key={id} onClick={() => handleClick(id)}>
+     {firstName} {lastName}
+  </div>) 
   })
   return(
     <>
-    <div>
-      <h2>Contacts <span className='add-contact'>+</span></h2>
-      {contactsList}
+    <div className='contacts'>
+      <h2 style={{fontWeight:"bold", paddingLeft:'8%', paddingRight: '12%'}}>
+        Contacts 
+        <span className='icon add-contact' onClick={() => setSelectedInfo({firstName: '', lastName: '', email: ''})}>
+          <ion-icon name="add-outline">
+          </ion-icon>
+        </span>
+      </h2>
+      <div className='contact-list'>
+        {contactsList}
+      </div>
     </div>
     </>
   );
