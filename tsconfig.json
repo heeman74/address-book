@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-  "module": "es6",
+  "module": "commonjs",
   "moduleResolution": "node",
   "sourceMap": true,
   "target": "es2017",
+  "allowSyntheticDefaultImports": true,
   "jsx": "react",
   "outDir": "../client/dist",
   "experimentalDecorators": true,
-  "allowSyntheticDefaultImports": true,
   "alwaysStrict": true,
   "typeRoots": [
     "typings", "../node_modules/@types"
   ],
   "baseUrl": "..",
 },
- "types": ["node"]
+ "types": ["node"],
+ "include": [ "."]
 }
