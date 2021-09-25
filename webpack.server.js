@@ -1,10 +1,12 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 console.log('server webpack');
 module.exports = {
 	context: __dirname,
+	mode: 'development',
 	entry: './src/server/index.ts',
 	output: {
 		path: path.resolve(__dirname, 'src/server/build'),
@@ -15,6 +17,7 @@ module.exports = {
 		historyApiFallback: true,
 	},
 	target: 'node',
+	externals: [nodeExternals()],
 	node: {
 		__dirname: false,
 	},
