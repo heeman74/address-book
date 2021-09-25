@@ -2,7 +2,7 @@
   "scripts": {
     "start": "concurrently -k --raw -n \"webpack,server\" \"npm run build\" \"npm run server:dev\"",
     "server:dev": "nodemon src/server/build/main.js",
-    "build": "webpack",
+    "build":  "concurrently -k --raw -n \"webpack,server\" \"webpack\" \"npm run server:dev\"",
     "dev": "webpack-dev-server --mode=development",
     "prod": "webpack --mode=production",
     "build:client": "webpack --config webpack.client.js --progress --profile --color --watch",
