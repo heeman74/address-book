@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start":"npm run server:dev",
-    "server:dev": "nodemon src/server/build/main.js",
+    "server:dev": "node src/server/build/main.js",
     "build": "webpack",
     "dev": "webpack-dev-server --mode=development",
     "prod": "webpack --mode=production",
