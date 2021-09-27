@@ -21,7 +21,7 @@ const Contacts = ({handleSelect, contacts, setSelectedInfo, setCancel, isCancele
     <div className='contacts'>
       <h2 style={{fontWeight:"bold", paddingLeft:'8%', paddingRight: '12%'}}>
         Contacts 
-        <span className='icon add-contact' onClick={() => { setSelectedInfo({firstName: '', lastName: '', email: ''}); setSelect(-1);}}>
+        <span className='icon add-contact' onClick={() => { setSelectedInfo({firstName: '', lastName: '', emails: []}); setSelect(-1);}}>
           <ion-icon name="add-outline">
           </ion-icon>
         </span>
