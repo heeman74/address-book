@@ -42,6 +42,7 @@ app.get('/contacts/:id', async(req, res) => {
 app.delete('/contacts/:id', async(req, res) => {
 	try{
 		await addressBook.deleteContact(req.params.id)
+		res.status(200).send('Successful removed.');
 	}catch(error){
 		if (error instanceof Error) {
 			res.status(404).send({
@@ -55,7 +56,7 @@ app.delete('/contacts/:id', async(req, res) => {
 	}
 })
 
-app.put('/conacts/:id', jsonParser, async(req, res) => {
+app.put('/contacts/:id', jsonParser, async(req, res) => {
 	try {
 		const contact = req.body;
 		const updatedContact = await addressBook.updateContact(req.params.id, contact)
@@ -76,11 +77,9 @@ app.put('/conacts/:id', jsonParser, async(req, res) => {
 app.post('/contacts', jsonParser, async(req, res) => {
 	try{
 		const contact = req.body;
-		console.log(req.body)
 		const addedConact = await addressBook.addContact(contact);
 		res.status(201).send(addedConact)
 	}catch(error){
-		console.log(error);
 		res.status(501).send('Internal Error');
 	}
 })
@@ -92,7 +91,7 @@ app.get('/', (_, res) => {
 const startServer = async () => {
 	try {
 		app.listen(process.env.PORT
-			|| 3000, () => console.log('server is listening on port 3000'));
+			|| 3000, () => console.log(`server is listening on port ${process.env.PORT || 3000}`));
 	} catch (error) {
 		console.log(error);
 	}

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Form from './Form';
 
-export const Contact = ({ emails, firstName, lastName, setCancel}) => {
-  console.log(emails, firstName, lastName);
+export const Contact = ({ emails, firstName, lastName, setCancel, addressBookHandleSubmit, handleDelete, setMessage}) => {
   const [contactInfo, setContact] = useState({emails, firstName, lastName});
  useEffect(() => {
   setContact({emails, firstName, lastName})
@@ -13,14 +12,13 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
   const [showMinus, setShowMinus] = useState({});
   const [validation, setValidation] = useState([]);
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      // console.log(re.test(String(value).toLowerCase()));
   const handleChange = (e) => {
     const {value, name} = e.target;
     setValidation([])
+    setMessage('')
     if (name !== 'email'){
       setContact( {...contactInfo, [name]:value});
     } else {
-      console.log({value, emailInfo})
       setEmail(value);
     }
   }
@@ -34,7 +32,6 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
   }
 
   const handleAddEmail = () => {
-   
     setAddEmail(!addEmail);
     setAdd(!add);
   }
@@ -59,14 +56,12 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
 
   const handleCancel = () => {
     setContact({firstName: '', lastName: '', emails: []})
-    console.log(setCancel)
+    setEmail('');
     setCancel(true)
   }
-  console.log({contactInfo})
 
-  const handleSubmit = () => {
+  const validatInput = () => {
     const {firstName, lastName } = contactInfo;
-    console.log('submit cli')
     if (firstName === '' && lastName === '') {
       setValidation([...validation, 'Please enter first name!', 'Please enter last name!']);
     } else if (firstName === ''){
@@ -74,13 +69,15 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
     } else if (lastName === ''){
       setValidation([...validation, 'Please enter last name!']);
     };
-    
+  }
+  const handleSubmit = () => {
+    validatInput();
+    addressBookHandleSubmit(contactInfo);
   }
 
   const emailList = () => contactInfo.emails.map((email, idx) => {
     return (<div key={idx} className='email' onMouseEnter={() => handleMouseEnter(idx)}  onMouseLeave={()=> handleMouseLeave(idx)}>{email} {showMinus[idx] && <span className='icon minus' onClick={() => handleRemoveEmail(idx)}><ion-icon name="remove-outline"></ion-icon></span>}</div>)
   })
- console.log({validation})
   return(
     <>
    
@@ -103,7 +100,7 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
       { !addEmail ? <div><span onClick={handleAddEmail} className='icon small-plus'><ion-icon name="add-outline"></ion-icon></span><span>add email</span></div> : (
         <>
         <div>
-          <Form handleChange={handleChange} name={'email'} text={emailInfo}/>
+          <Form handleChange={handleChange} name={'email'}  text={emailInfo}/>
           <span className='icon small-plus' onClick={handleAdd}><ion-icon name="add-outline"></ion-icon>
           </span>
           <span>add</span>
@@ -111,7 +108,7 @@ export const Contact = ({ emails, firstName, lastName, setCancel}) => {
         </>
        ) }
       <div className='buttons'>
-        <a className='button del'>Delete</a> 
+        <a className='button del'onClick={handleDelete}>Delete</a> 
         <span style={{display:'inline-block'}}>
           <a className='button cal' onClick={handleCancel}>Cancel</a>
           <a className='button save' onClick={handleSubmit}>Save</a>
