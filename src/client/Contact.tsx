@@ -40,7 +40,7 @@ export const Contact = ({ emails, id, firstName, lastName, setCancel, addressBoo
   }
 
   const handleAdd = () => {
-     if (!re.test(String(emailInfo).toLowerCase())) {
+     if (!re.test(String(emailInfo).toLowerCase()) && emailInfo !== '') {
       setValidation([...validation, 'Please enter a valid email address!'])
      } else {
        setAddEmail(!addEmail);
