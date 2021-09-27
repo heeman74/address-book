@@ -14,9 +14,9 @@ app.use(express.static(path.resolve(__dirname, '..', '../client/dist')));
 
 app.get('/contacts/paginated', async (req, res) => {
 	try{
-		res.header("Access-Control-Allow-Origin", "*")
 		const {page, itemsPerPage} = req.query;
 		const contacts = await addressBook.getContactsPaginated(+page, +itemsPerPage);
+		res.header("Access-Control-Allow-Origin", "*")
 		res.status(200).send(contacts)
 	}catch(error){
 		res.status(500).send('Internal Error');
