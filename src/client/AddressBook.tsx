@@ -51,7 +51,6 @@ const initialState = [{
         // however it has already been paginated and it will need to be sorted, it used a paginated request 
         // to get the new updated contacts.  I know it is expensive operation, but it is paginated and I think it will be the
         // best option if the app needs to display 20 contacts at a time.
-        console.log({response})
         const result = await axios.get('http://localhost:3000/contacts/paginated?page=1&itemsPerPage=20')
         setContacts(result.data.contacts);
         setSelectedInfo({id: -1, firstName: '', lastName: '', emails: []});
