@@ -28,7 +28,10 @@ const initialState = [{
 
   useEffect(() => {
     const getData = async() => {
-      const result = await axios.get('http://localhost:5000/contacts/paginated?page=1&itemsPerPage=20')
+      const result = await axios.get('http://localhost:5000/contacts/paginated?page=1&itemsPerPage=20', 
+      { headers: {
+          'Access-Control-Allow-Origin': true,
+        }})
       setSelectedInfo({id: -1, firstName: '', lastName: '', emails: []});
       setContacts(result.data.contacts);
       }
@@ -51,7 +54,10 @@ const initialState = [{
         // however it has already been paginated and it will need to be sorted, it used a paginated request 
         // to get the new updated contacts.  I know it is expensive operation, but it is paginated and I think it will be the
         // best option if the app needs to display 20 contacts at a time.
-        const result = await axios.get('http://localhost:5000/contacts/paginated?page=1&itemsPerPage=20')
+        const result = await axios.get('http://localhost:5000/contacts/paginated?page=1&itemsPerPage=20', {
+        headers: {
+          'Access-Control-Allow-Origin': true,
+        }})
         setContacts(result.data.contacts);
         setSelectedInfo({id: -1, firstName: '', lastName: '', emails: []});
         setSelect(-1)
