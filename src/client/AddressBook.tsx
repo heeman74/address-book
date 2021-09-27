@@ -28,7 +28,7 @@ const initialState = [{
 
   useEffect(() => {
     const getData = async() => {
-      const result = await axios.get('http://localhost:8080/contacts/paginated?page=1&itemsPerPage=20', 
+      const result = await axios.get('http://localhost:3000/contacts/paginated?page=1&itemsPerPage=20', 
       { headers: {
           'Access-Control-Allow-Origin': true,
         }})
