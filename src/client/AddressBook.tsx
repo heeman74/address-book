@@ -49,12 +49,12 @@ const initialState = [{
   const addressBookHandleSubmit = async (contact) => {
     try {
       if (selectedId === -1) {
-        const response = await axios.post('http://localhost:5000/contacts', contact)
+        const response = await axios.post('/contacts', contact)
         // this can be done with new data that was given from BE to FE and added it unto the contacts state.
         // however it has already been paginated and it will need to be sorted, it used a paginated request 
         // to get the new updated contacts.  I know it is expensive operation, but it is paginated and I think it will be the
         // best option if the app needs to display 20 contacts at a time.
-        const result = await axios.get('http://localhost:5000/contacts/paginated?page=1&itemsPerPage=20', {
+        const result = await axios.get('/contacts/paginated?page=1&itemsPerPage=20', {
         headers: {
           'Access-Control-Allow-Origin': true,
         }})
@@ -63,7 +63,7 @@ const initialState = [{
         setSelect(-1)
         setMessage('Successfully Added!')
       } else {
-        const response = await axios.put(`http://localhost:5000/contacts/${selectedId}`, contact);
+        const response = await axios.put(`/contacts/${selectedId}`, contact);
         const updatedContacts = [...contacts];
         updatedContacts.forEach((oldContact, idx) => {
           if (oldContact.id === selectedId) {
@@ -87,7 +87,7 @@ const initialState = [{
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/contacts/${selectedId}`);
+      await axios.delete(`/contacts/${selectedId}`);
       const newContact = [...contacts]
       const deletedContacts = newContact.filter(({id}) => id !== selectedId);
       setContacts(deletedContacts);
