@@ -8,6 +8,8 @@ const app = express();
 const jsonParser = bodyParser.json();
 
 const addressBook = new AddressBook();
+
+// 
 app.use(express.static(path.resolve(__dirname, '..', '../client/dist')));
 
 
