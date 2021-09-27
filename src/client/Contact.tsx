@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Form from './Form';
 
-export const Contact = ({ emails, firstName, lastName, setCancel, addressBookHandleSubmit, handleDelete, setMessage}) => {
+export const Contact = ({ emails, id, firstName, lastName, setCancel, addressBookHandleSubmit, handleDelete, setMessage}) => {
   const [contactInfo, setContact] = useState({emails, firstName, lastName});
  useEffect(() => {
   setContact({emails, firstName, lastName})
+  if (id === -1){
+    setEmail('')
+  }
  }, [emails, firstName, lastName])
   const [emailInfo, setEmail] = useState('')
   const [addEmail, setAddEmail] = useState(false);
@@ -71,8 +74,11 @@ export const Contact = ({ emails, firstName, lastName, setCancel, addressBookHan
     };
   }
   const handleSubmit = () => {
-    validatInput();
-    addressBookHandleSubmit(contactInfo);
+      validatInput();
+      const {firstName, lastName } = contactInfo;
+      if (firstName !== '' || lastName !== '') {
+        addressBookHandleSubmit(contactInfo);
+    }
   }
 
   const emailList = () => contactInfo.emails.map((email, idx) => {
