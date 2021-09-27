@@ -35,7 +35,6 @@ export class AddressBook {
       const contacts = this.getAllContacts()
       const id = uuid()
       contacts[id] = contact;
-      console.log({contacts, contact});
       this.writeContacts(contacts)
       return {
         id, 
@@ -51,11 +50,9 @@ export class AddressBook {
       const contactList = this.getAllContacts()
       const totalItems = Object.keys(contactList).length;
       const sortedContact = this.sortedWName(Object.entries(contactList));
-      console.log({contactList, sortedContact})
       const contacts = [];
       const remainingItemsOfLastPage = totalItems%itemsPerPage;
       const numberOfPages = Math.ceil(totalItems/itemsPerPage)
-      console.log({numberOfPages})
       if (numberOfPages <= page){
         let startingIdx = 0;
         let endingIdx = 0
@@ -90,10 +87,10 @@ export class AddressBook {
   deleteContact = (id: string) => {
     try {
       const contacts = this.getAllContacts();
+      if (!contacts[id]){
+       throw new Error(`Contact with ID ${id} not found`)
+     } 
       delete contacts[id];
-       if (!contacts[id]){
-        throw new Error(`Contact with ID ${id} not found`)
-      } 
       this.writeContacts(contacts);
     }catch (error){
       throw error
@@ -120,6 +117,7 @@ export class AddressBook {
       const contacts = this.getAllContacts();
       contacts[id] = contact;
       this.writeContacts(contacts);
+      console.log({contact});
       if (contacts[id]){
         return  {
           id: id, 
